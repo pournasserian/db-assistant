@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36109.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{CAEC6F25-CA54-454A-A375-C49606133943}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseConnector", "DatabaseConnector\DatabaseConnector.csproj", "{4138E0EA-721C-4EB2-B25A-81FAF515CD7C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{CAEC6F25-CA54-454A-A375-C49606133943}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAEC6F25-CA54-454A-A375-C49606133943}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAEC6F25-CA54-454A-A375-C49606133943}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4138E0EA-721C-4EB2-B25A-81FAF515CD7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4138E0EA-721C-4EB2-B25A-81FAF515CD7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4138E0EA-721C-4EB2-B25A-81FAF515CD7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4138E0EA-721C-4EB2-B25A-81FAF515CD7C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
