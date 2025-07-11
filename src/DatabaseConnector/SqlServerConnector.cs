@@ -4,7 +4,7 @@ using System.Data.Common;
 
 namespace DatabaseConnector;
 
-public class SqlServer(string connectionString)
+public class SqlServerConnector(string connectionString) : IDatabaseConnector
 {
     public string ConnectionString { get; set; } = connectionString;
 
@@ -44,8 +44,21 @@ public class SqlServer(string connectionString)
         }
     }
 
+    public async Task<DatabaseInfo> GetDatabase(string name, CancellationToken cancellationToken = default)
+    {
+        var database = new DatabaseInfo
+        {
+            Name = name,
+            Tables = await GetTables(cancellationToken),
+            Views = await GetViews(cancellationToken),
+            StoreProcedures = await GetStoredProcedures(cancellationToken),
+            Functions = await GetFunctions(cancellationToken)
+        };
+        return database;
+    }
+
     // Get all tables in the database with their schemas
-    public async Task<List<TableInfo>> GetTables(CancellationToken cancellationToken = default)
+    private async Task<List<TableInfo>> GetTables(CancellationToken cancellationToken = default)
     {
         EnsureConnection();
 
@@ -142,7 +155,7 @@ public class SqlServer(string connectionString)
         return columns;
     }
 
-    public async Task<List<ViewInfo>> GetViews(CancellationToken cancellationToken = default)
+    private async Task<List<ViewInfo>> GetViews(CancellationToken cancellationToken = default)
     {
         EnsureConnection();
 
@@ -179,7 +192,7 @@ public class SqlServer(string connectionString)
         return views;
     }
 
-    public async Task<List<StoreProcedureInfo>> GetStoredProcedures(CancellationToken cancellationToken = default)
+    private async Task<List<StoreProcedureInfo>> GetStoredProcedures(CancellationToken cancellationToken = default)
     {
         EnsureConnection();
 
@@ -216,7 +229,7 @@ public class SqlServer(string connectionString)
         return procedures;
     }
 
-    public async Task<List<FunctionInfo>> GetFunctions(CancellationToken cancellationToken = default)
+    private async Task<List<FunctionInfo>> GetFunctions(CancellationToken cancellationToken = default)
     {
         EnsureConnection();
 
