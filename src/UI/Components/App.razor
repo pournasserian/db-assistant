@@ -6,14 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="/" />
     <link rel="stylesheet" href="/lib/tabler/tabler.min.css" />
-    @* <link rel="stylesheet" href="@Assets["app.css"]" />
-    <link rel="stylesheet" href="@Assets["UI.styles.css"]" /> *@
     <ImportMap />
-    @* <link rel="icon" type="image/png" href="favicon.png" /> *@
     <HeadOutlet @rendermode="InteractiveServer" />
 </head>
 
-<body>
+<body class="d-flex flex-column" style="background: var(--tblr-bg-surface)">
     <Routes @rendermode="InteractiveServer" />
     <script src="/lib/tabler/tabler.min.js"></script>
     <script src="_framework/blazor.web.js"></script>
