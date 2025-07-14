@@ -4,9 +4,9 @@ using System.Data.Common;
 
 namespace DatabaseConnector;
 
-public class SqlServerConnector(string connectionString) : IDatabaseConnector
+public class SqlServerConnector(SqlServerSettings settings) : IDatabaseConnector
 {
-    public string ConnectionString { get; set; } = connectionString;
+    public string ConnectionString { get; set; } = settings.ConnectionString;
 
     public SqlConnection Connection { get; set; } = default!;
 

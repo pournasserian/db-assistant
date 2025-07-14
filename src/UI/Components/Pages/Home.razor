@@ -2,12 +2,17 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
-
 <div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Database Settings</h3>
+    </div>
     <div class="card-body">
         <div class="w-full">
             <EditForm Model="Model" OnValidSubmit="Submit">
+                <div class="mb-3">
+                    <label class="form-label">Database Name</label>
+                    <InputText @bind-Value="Model!.Name" class="form-control" placeholder="Input name" />
+                </div>
                 <div class="mb-3">
                     <label class="form-label">Connection String</label>
                     <InputText @bind-Value="Model!.ConnectionString" class="form-control" placeholder="Input placeholder" />
@@ -15,13 +20,33 @@
             </EditForm>
         </div>
     </div>
+    <div class="card-footer">
+        <div class="row align-items-center">
+            <div class="col">@Message</div>
+            <div class="col-auto">
+                <button @onclick="Submit" class="btn btn-primary">Connect</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 @code {
-    [SupplyParameterFromForm]
-    private DatabaseSettings Model { get; set; } = new();
+    private SqlServerSettings Model { get; set; } = new();
 
-    private void Submit()
+    private string Message { get; set; } = string.Empty;
+
+    private async Task Submit()
     {
+        var databaseConnector = new SqlServerConnector(Model);
+        Message = "Connecting to database..."; 
+        if (await databaseConnector.TryConnect())
+        {
+            Message = "Connected successfully...";
+            var dbInfo = await databaseConnector.GetDatabase(Model.Name);
+        }
+        else
+        {
+            Message = "Failed to connect to database.";
+        }
     }
 }
