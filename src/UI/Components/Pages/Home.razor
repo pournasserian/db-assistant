@@ -8,7 +8,7 @@
     </div>
     <div class="card-body">
         <div class="w-full">
-            <EditForm Model="Model" OnValidSubmit="Submit">
+            <EditForm Model="Model" OnValidSubmit="LoadDatabaseInfo">
                 <div class="mb-3">
                     <label class="form-label">Database Name</label>
                     <InputText @bind-Value="Model!.Name" class="form-control" placeholder="Input name" />
@@ -24,7 +24,14 @@
         <div class="row align-items-center">
             <div class="col">@Message</div>
             <div class="col-auto">
-                <button @onclick="Submit" class="btn btn-primary">Connect</button>
+                @if (DatabaseInfo is null)
+                {
+                    <button @onclick="LoadDatabaseInfo" class="btn btn-primary">Connect</button>
+                }
+                else
+                {
+                    <button @onclick="SaveDatabaseInfo" class="btn btn-primary">Save</button>
+                }
             </div>
         </div>
     </div>
@@ -32,21 +39,28 @@
 
 @code {
     private SqlServerSettings Model { get; set; } = new();
-
+    private DatabaseInfo? DatabaseInfo { get; set; }
     private string Message { get; set; } = string.Empty;
 
-    private async Task Submit()
+    private async Task LoadDatabaseInfo()
     {
         var databaseConnector = new SqlServerConnector(Model);
-        Message = "Connecting to database..."; 
+        Message = "Connecting to database...";
         if (await databaseConnector.TryConnect())
         {
             Message = "Connected successfully...";
-            var dbInfo = await databaseConnector.GetDatabase(Model.Name);
+            DatabaseInfo = await databaseConnector.GetDatabase(Model.Name);
         }
         else
         {
             Message = "Failed to connect to database.";
         }
+    }
+
+    private async Task SaveDatabaseInfo()
+    {
+        var repository = new Repository();
+        if (DatabaseInfo != null)
+            await repository.SaveServer(DatabaseInfo);
     }
 }
