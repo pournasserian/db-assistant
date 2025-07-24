@@ -10,4 +10,10 @@
     <ProjectReference Include="..\DatabaseConnector\DatabaseConnector.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Humanizer" Version="2.14.1" />
+    <PackageReference Include="LiteDB.Queryable" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.0" />
+  </ItemGroup>
+
 </Project>

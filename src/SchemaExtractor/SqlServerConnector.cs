@@ -40,9 +40,9 @@ public class SqlServerSchemaExtractor : ISchemaExtractor
     }
 
     // Get all tables in the database with their schemas
-    public async Task<List<TableInfo>> ExtractTables(CancellationToken cancellationToken = default)
+    public async Task<List<Table>> ExtractTables(CancellationToken cancellationToken = default)
     {
-        var tables = new List<TableInfo>();
+        var tables = new List<Table>();
 
         string query = @"
             SELECT 
@@ -69,7 +69,7 @@ public class SqlServerSchemaExtractor : ISchemaExtractor
             using var reader = await command.ExecuteReaderAsync(cancellationToken);
             while (await reader.ReadAsync(cancellationToken))
             {
-                tables.Add(new TableInfo
+                tables.Add(new Table
                 {
                     Schema = reader["SchemaName"].ToString()!,
                     Name = reader["TableName"].ToString()!
@@ -82,9 +82,9 @@ public class SqlServerSchemaExtractor : ISchemaExtractor
         return tables;
     }
 
-    private static async Task<List<ColumnInfo>> ExtractColumns(SqlConnection sqlConnection, string schemaName, string tableName, CancellationToken cancellationToken = default)
+    private static async Task<List<Column>> ExtractColumns(SqlConnection sqlConnection, string schemaName, string tableName, CancellationToken cancellationToken = default)
     {
-        var columns = new List<ColumnInfo>();
+        var columns = new List<Column>();
 
         string query = @"
             SELECT 
@@ -115,7 +115,7 @@ public class SqlServerSchemaExtractor : ISchemaExtractor
             using var reader = await command.ExecuteReaderAsync(cancellationToken);
             while (await reader.ReadAsync(cancellationToken))
             {
-                columns.Add(new ColumnInfo
+                columns.Add(new Column
                 {
                     Name = reader["ColumnName"].ToString()!,
                     DataType = reader["DataType"].ToString()!,
@@ -133,9 +133,9 @@ public class SqlServerSchemaExtractor : ISchemaExtractor
         return columns;
     }
 
-    public async Task<List<ViewInfo>> ExtractViews(CancellationToken cancellationToken = default)
+    public async Task<List<View>> ExtractViews(CancellationToken cancellationToken = default)
     {
-        var views = new List<ViewInfo>();
+        var views = new List<View>();
 
         string query = @"
             SELECT 
@@ -157,7 +157,7 @@ public class SqlServerSchemaExtractor : ISchemaExtractor
             using var reader = await command.ExecuteReaderAsync(cancellationToken);
             while (await reader.ReadAsync(cancellationToken))
             {
-                views.Add(new ViewInfo
+                views.Add(new View
                 {
                     Name = reader["ViewName"].ToString()!,
                     Schema = reader["SchemaName"].ToString()!,
@@ -169,9 +169,9 @@ public class SqlServerSchemaExtractor : ISchemaExtractor
         return views;
     }
 
-    public async Task<List<StoreProcedureInfo>> ExtractStoredProcedures(CancellationToken cancellationToken = default)
+    public async Task<List<StoredProcedure>> ExtractStoredProcedures(CancellationToken cancellationToken = default)
     {
-        var procedures = new List<StoreProcedureInfo>();
+        var procedures = new List<StoredProcedure>();
 
         string query = @"
             SELECT 
@@ -193,7 +193,7 @@ public class SqlServerSchemaExtractor : ISchemaExtractor
             using var reader = await command.ExecuteReaderAsync(cancellationToken);
             while (await reader.ReadAsync(cancellationToken))
             {
-                procedures.Add(new StoreProcedureInfo
+                procedures.Add(new StoredProcedure
                 {
                     Name = reader["ProcedureName"].ToString()!,
                     Schema = reader["SchemaName"].ToString()!,
@@ -205,9 +205,9 @@ public class SqlServerSchemaExtractor : ISchemaExtractor
         return procedures;
     }
 
-    public async Task<List<FunctionInfo>> ExtractFunctions(CancellationToken cancellationToken = default)
+    public async Task<List<Function>> ExtractFunctions(CancellationToken cancellationToken = default)
     {
-        var functions = new List<FunctionInfo>();
+        var functions = new List<Function>();
 
         string query = @"
             SELECT 
@@ -237,7 +237,7 @@ public class SqlServerSchemaExtractor : ISchemaExtractor
             using var reader = await command.ExecuteReaderAsync(cancellationToken);
             while (await reader.ReadAsync(cancellationToken))
             {
-                functions.Add(new FunctionInfo
+                functions.Add(new Function
                 {
                     Name = reader["FunctionName"].ToString()!,
                     Schema = reader["SchemaName"].ToString()!,

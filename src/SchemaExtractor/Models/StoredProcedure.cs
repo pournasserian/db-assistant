@@ -1,8 +1,8 @@
 ﻿namespace SchemaExtractor.Models;
 
-public class TableInfo
+public class StoredProcedure
 {
     public string Name { get; set; } = default!;
     public string Schema { get; set; } = default!;
-    public List<ColumnInfo> Columns { get; set; } = [];
+    public string? Definition { get; set; }
 }

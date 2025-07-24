@@ -1,6 +1,6 @@
 ﻿namespace SchemaExtractor.Models;
 
-public class ColumnInfo
+public class Column
 {
     public string Name { get; set; } = default!;
     public string DataType { get; set; } = default!;
