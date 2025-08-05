@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseConnector", "Databa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchemaExtractor", "SchemaExtractor\SchemaExtractor.csproj", "{432B140E-C8AF-43AF-89B7-2F40F941A5AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{0835C60E-B25B-4089-A58B-B78A98686E95}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{432B140E-C8AF-43AF-89B7-2F40F941A5AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{432B140E-C8AF-43AF-89B7-2F40F941A5AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{432B140E-C8AF-43AF-89B7-2F40F941A5AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0835C60E-B25B-4089-A58B-B78A98686E95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0835C60E-B25B-4089-A58B-B78A98686E95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0835C60E-B25B-4089-A58B-B78A98686E95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0835C60E-B25B-4089-A58B-B78A98686E95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
